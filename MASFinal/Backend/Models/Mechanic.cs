@@ -19,5 +19,10 @@ namespace MASFinal.Backend.Models
             DateOfEmployment = dateOfEmployment;
             GrossSalary = grossSalary;
         }
+
+        internal void AddRepair(Repair repair)
+        {
+            Repairs.Add(repair);
+        }
     }
 }

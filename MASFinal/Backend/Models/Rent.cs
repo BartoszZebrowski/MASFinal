@@ -14,9 +14,9 @@ namespace MASFinal.Backend.Models
         public bool IsCompleted { get; set; }
 
         public Client Client { get; private set; }
-        public Vehicle Vehicle { get; private set; }
+        public IVehicle Vehicle { get; private set; }
 
-        private Rent(DateTime rentalDate, DateTime returnDate, decimal rentalAmount, Client client, Vehicle vehicle)
+        private Rent(DateTime rentalDate, DateTime returnDate, decimal rentalAmount, Client client, IVehicle vehicle)
         {
             RentalDate = rentalDate;
             ReturnDate = returnDate;
@@ -26,7 +26,7 @@ namespace MASFinal.Backend.Models
             Vehicle = vehicle;
         }
 
-        public static Rent CreateRent(Client client, Vehicle vehicle, DateTime rentalDate, DateTime returnDate, decimal rentalAmount)
+        public static Rent CreateRent(Client client, IVehicle vehicle, DateTime rentalDate, DateTime returnDate, decimal rentalAmount)
         {
             if (client is null)
                 throw new ArgumentNullException("Client can't be null!");

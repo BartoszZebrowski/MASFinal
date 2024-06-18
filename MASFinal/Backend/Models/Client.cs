@@ -9,7 +9,6 @@ namespace MASFinal.Backend.Models
 {
     class Client : Person
     {
-
         public DateTime JoiningDate { get; private set; }
         public int Discount { get; private set; }
         public List<Rent> Rents { get; private set; } = new();

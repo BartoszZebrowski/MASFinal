@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MASFinal.Backend.Generic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,32 @@ using System.Threading.Tasks;
 
 namespace MASFinal.Backend.Models
 {
-    class Bus : GroundVehicle
+    class Bus : GroundVehicle, Entity
     {
+        private Guid _id;
+        public Guid Id
+        {
+            get => _id;
+            set => _id = value;
+        }
         public decimal TrunkCapacity { get; set; }
         public BodyType TypeOfBody { get; set; }
+        public GroundVehicle GroundVehicle { get; set; }
+
+        private Bus(GroundVehicle groundVehicle, decimal trunkCapacity, BodyType typeOfBody)
+        {
+            GroundVehicle = groundVehicle;
+            TrunkCapacity = trunkCapacity;
+            TypeOfBody = typeOfBody;
+        }
+
+        public static void CreateCamper(GroundVehicle groundVehicle, decimal trunkCapacity, BodyType typeOfBody)
+        {
+            if (groundVehicle is null)
+                throw new ArgumentNullException("Ground Vehicle can't be null!");
+
+            var bus = new Bus(groundVehicle, trunkCapacity, typeOfBody);
+            groundVehicle.SetBus(bus);
+        }
     }
 }
