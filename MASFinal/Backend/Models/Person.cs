@@ -29,5 +29,7 @@ namespace MASFinal.Backend.Models
             Email = email;
             PhoneNumber = phoneNumber;
         }
+
+        protected Person() { }
     }
 }

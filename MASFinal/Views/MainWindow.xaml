@@ -1,20 +1,15 @@
-﻿<Window x:Class="MASFinal.MainWindow"
+﻿<Window x:Class="MASFinal.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Uśmiechnięta Wypożyczalnia" Height="450" Width="800" Background="Black">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="480*"/>
-            <ColumnDefinition Width="59*"/>
-            <ColumnDefinition Width="261*"/>
-        </Grid.ColumnDefinitions>
+    <Grid>>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" x:Name="_title" Text="Uśmiechnięta Wypożyczalnia :)" Foreground="LimeGreen" FontSize="24" FontWeight="Bold" Margin="226,0,0,10" HorizontalAlignment="Left" />
+        <!--<TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" x:Name="_title" Text="Uśmiechnięta Wypożyczalnia :)" Foreground="LimeGreen" FontSize="24" FontWeight="Bold" Margin="226,0,0,10" HorizontalAlignment="Left" />
 
         <StackPanel Grid.Column="0" Grid.Row="1" Margin="10,10,10,10">
             <TextBlock Text="Pojazdy" Foreground="White" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
@@ -33,6 +28,8 @@
             <Button Content="Sprzedaj pojazd" Width="200" Height="50" Background="LimeGreen" Foreground="White"/>
             <Button Content="Złomuj pojazd" Width="200" Height="50" Background="LimeGreen" Foreground="White"/>
             <Button Content="Zarządzaj naprawami" Width="200" Height="50" Background="LimeGreen" Foreground="White"/>
-        </StackPanel>
+            <Button Content="Zarządzaj naprawami" Width="200" Height="50" Background="LimeGreen" Foreground="White"/>
+
+        </StackPanel>-->
     </Grid>
 </Window>

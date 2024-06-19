@@ -17,7 +17,11 @@ namespace MASFinal.Backend.Models
         }
 
         public ElectricEngine? ElectricEngine { get; set; }
+
+        public Guid? ElectricEngineId { get; set; }
+
         public CombustionEngine? CombustionEngine { get; set; }
+        public Guid? CombustionEngineId { get; set; }
 
         private DriveType() { }
 

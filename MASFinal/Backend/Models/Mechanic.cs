@@ -20,6 +20,8 @@ namespace MASFinal.Backend.Models
             GrossSalary = grossSalary;
         }
 
+        private Mechanic() : base() { }
+
         internal void AddRepair(Repair repair)
         {
             Repairs.Add(repair);

@@ -26,6 +26,8 @@ namespace MASFinal.Backend.Models
             TypeOfBody = typeOfBody;
         }
 
+        private Bus() { }
+
         public static void CreateCamper(GroundVehicle groundVehicle, decimal trunkCapacity, BodyType typeOfBody)
         {
             if (groundVehicle is null)

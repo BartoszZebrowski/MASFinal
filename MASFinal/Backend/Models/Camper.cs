@@ -27,6 +27,8 @@ namespace MASFinal.Backend.Models
             HasGenerator = hasGenerator;
         }
 
+        private Camper() { }
+
         public static void CreateCamper(GroundVehicle groundVehicle, string equipment, bool hasGenerator)
         {
             if (groundVehicle is null)

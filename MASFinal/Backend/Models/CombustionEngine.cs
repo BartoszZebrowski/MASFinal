@@ -26,6 +26,8 @@ namespace MASFinal.Backend.Models
             AverageFuelConsumption = averageFuelConsumption;
         }
 
+        private CombustionEngine() { }
+
         public static CombustionEngine CreateCombustionEngine(DriveType driveType, decimal capacity, decimal averageFuelConsumption)
         {
             if (driveType is null) 

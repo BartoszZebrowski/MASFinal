@@ -26,6 +26,8 @@ namespace MASFinal.Backend.Models
             MaximumChargingCurrent = maximumChargingCurrent;
         }
 
+        private ElectricEngine() { }
+
         public static ElectricEngine CreateElectricEngine(DriveType driveType, decimal averagePowerConsumption, decimal maximumChargingCurrent)
         {
             if(driveType is null)

@@ -20,10 +20,9 @@ namespace MASFinal.Backend.Models
         public DriveType Drive { get; set; }
         public List<Rent> Rents { get; set; }
 
-        public abstract void SellVehicle(decimal price);
-        public abstract void ScrapVehicle(decimal price);
+        public void SellVehicle(decimal price);
+        public void ScrapVehicle(decimal price);
         public void AddRent(Rent rent) => Rents.Add(rent);
-
         public void SetDriveType(DriveType drive)
         {
             // dodac sprawdzenie czy gdzies juz sa przyczepione !!!!

@@ -8,6 +8,13 @@ namespace MASFinal.Backend.Models
 {
     class GroundVehicle : IVehicle
     {
+        private Guid _id;
+        public Guid Id
+        {
+            get => _id;
+            set => _id = value;
+        }
+
         private string _brand;
         public string Brand
         {
@@ -77,7 +84,9 @@ namespace MASFinal.Backend.Models
         public int NumberOfWheels { get; set; }
         public int RimSize { get; set; }
         public Bus? Bus { get; set; }
+        public Guid BusId { get; set; }
         public Camper? Camper { get; set; }
+        public Guid CamperId { get; set; }
         public List<Repair> Repairs { get; private set; }
 
         public void ScrapVehicle(decimal price)

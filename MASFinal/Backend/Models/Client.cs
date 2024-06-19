@@ -20,6 +20,8 @@ namespace MASFinal.Backend.Models
             Discount = discount;
         }
 
+        private Client() : base() { }
+        
         public void AddRent(Rent rent) => Rents.Add(rent);
 
         public void RemoveRent(Rent rent) => Rents.Remove(rent);

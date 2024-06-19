@@ -1,13 +1,22 @@
-﻿using System;
+﻿using MASFinal.Backend.Generic;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MASFinal.Backend.Models
 {
-    class Rent
+    class Rent : Entity
     {
+        private Guid _id;
+        public Guid Id
+        {
+            get => _id;
+            set => _id = value;
+        }
+
         public DateTime RentalDate { get; set; }
         public DateTime ReturnDate { get; set; }
         public decimal RentalAmount { get; set; }
@@ -25,6 +34,8 @@ namespace MASFinal.Backend.Models
             Client = client;
             Vehicle = vehicle;
         }
+
+        private Rent() { }  
 
         public static Rent CreateRent(Client client, IVehicle vehicle, DateTime rentalDate, DateTime returnDate, decimal rentalAmount)
         {

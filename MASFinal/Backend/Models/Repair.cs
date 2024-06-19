@@ -32,6 +32,8 @@ namespace MASFinal.Backend.Models
             GroundVehicle = groundVehicle;
         }
 
+        private Repair() { }    
+
         public static void CreateRepair(Mechanic? mechanic, GroundVehicle groundVehicle, DateTime startDate, DateTime endDate, decimal repairCost, string description)
         {
             if (groundVehicle is null)
