@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MASFinal.Backend.Models
 {
-    class Mechanic : Person
+    public class Mechanic : Person
     {
         public DateTime DateOfEmployment { get; set; }
         public decimal GrossSalary { get; set; }

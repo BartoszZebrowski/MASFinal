@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MASFinal.Backend.Models
 {
-    enum DrivingLicencType
+    public enum DrivingLicencType
     {
         B, C, CE
     }

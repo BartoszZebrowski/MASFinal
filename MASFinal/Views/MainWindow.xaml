@@ -2,12 +2,27 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Uśmiechnięta Wypożyczalnia" Height="450" Width="800" Background="Black">
-    <Grid>>
+    <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*" />
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Uśmiechnięta Wyporzyczalnia" 
+                   FontSize="40"  
+                   Foreground="White" 
+                   FontWeight="DemiBold" />
+            
+            <Label Content=":)" 
+                   FontSize="37"  
+                   FontWeight="DemiBold"
+                   VerticalContentAlignment="Top"
+                   Foreground="{StaticResource MainGreen}"/>
+        </StackPanel>
+
+        <Frame NavigationUIVisibility="Hidden" x:Name="_mainFrame" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <!--<TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" x:Name="_title" Text="Uśmiechnięta Wypożyczalnia :)" Foreground="LimeGreen" FontSize="24" FontWeight="Bold" Margin="226,0,0,10" HorizontalAlignment="Left" />
 

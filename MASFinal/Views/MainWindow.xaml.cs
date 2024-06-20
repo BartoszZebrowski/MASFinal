@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using MASFinal.ViewModels;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,11 +17,25 @@ namespace MASFinal.Views
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly MainWindowViewModel _mainWindowViewModel;
+
         public MainWindow()
         {
+            var mainWindowViewModel = MainWindowViewModel.GetInstance();
+            mainWindowViewModel.PageChanged += OnPageChanged;
+
             InitializeComponent();
 
-            
+            DataContext = mainWindowViewModel;
+            mainWindowViewModel.ChangePage(new VehiclesList());
+
+
+        }
+
+        private void OnPageChanged(Page page)
+        {
+            _mainFrame.Navigate(page);
+
         }
     }
 }

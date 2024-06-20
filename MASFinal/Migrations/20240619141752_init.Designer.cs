@@ -4,6 +4,7 @@ using MASFinal.Backend.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MASFinal.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240619141752_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -248,13 +251,13 @@ namespace MASFinal.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("BusId")
+                    b.Property<Guid>("BusId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("BuyDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("CamperId")
+                    b.Property<Guid>("CamperId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Category")
@@ -296,12 +299,10 @@ namespace MASFinal.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BusId")
-                        .IsUnique()
-                        .HasFilter("[BusId] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("CamperId")
-                        .IsUnique()
-                        .HasFilter("[CamperId] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("DriveId");
 
@@ -483,12 +484,14 @@ namespace MASFinal.Migrations
                     b.HasOne("MASFinal.Backend.Models.Bus", "Bus")
                         .WithOne("GroundVehicle")
                         .HasForeignKey("MASFinal.Backend.Models.GroundVehicle", "BusId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("MASFinal.Backend.Models.Camper", "Camper")
                         .WithOne("GroundVehicle")
                         .HasForeignKey("MASFinal.Backend.Models.GroundVehicle", "CamperId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("MASFinal.Backend.Models.DriveType", "Drive")
                         .WithMany()

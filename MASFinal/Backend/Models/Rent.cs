@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MASFinal.Backend.Models
 {
-    class Rent : Entity
+    public class Rent : Entity
     {
         private Guid _id;
         public Guid Id

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MASFinal.Backend.Models
 {
-    class Repair : Entity
+    public class Repair : Entity
     {
         private Guid _id;
         public Guid Id

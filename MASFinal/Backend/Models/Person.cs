@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MASFinal.Backend.Models
 {
-    abstract class Person : Entity
+    public abstract class Person : Entity
     {
         private Guid _id;
         public Guid Id

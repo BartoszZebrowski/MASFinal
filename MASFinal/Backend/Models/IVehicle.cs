@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MASFinal.Backend.Models
 {
-    interface IVehicle : Entity
+    public interface IVehicle : Entity
     {
         public string Brand { get; set; }
         public string Model { get; set; }

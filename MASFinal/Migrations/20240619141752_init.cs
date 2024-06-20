@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MASFinal.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,6 +26,32 @@ namespace MASFinal.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Adress", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Buses",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TrunkCapacity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TypeOfBody = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Buses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Campers",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Equipment = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HasGenerator = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Campers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -107,8 +133,8 @@ namespace MASFinal.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ElectricEngineId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CombustionEngineId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ElectricEngineId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CombustionEngineId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -117,14 +143,12 @@ namespace MASFinal.Migrations
                         name: "FK_DriveTypes_CombustionEngines_CombustionEngineId",
                         column: x => x.CombustionEngineId,
                         principalTable: "CombustionEngines",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_DriveTypes_ElectricEngines_ElectricEngineId",
                         column: x => x.ElectricEngineId,
                         principalTable: "ElectricEngines",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -179,31 +203,27 @@ namespace MASFinal.Migrations
                     MaximumLaunchAngle = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     DriveSystem = table.Column<int>(type: "int", nullable: true),
                     RequiresHelmsmanLicense = table.Column<bool>(type: "bit", nullable: true),
-                    Displacement = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    TrunkCapacity = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    TypeOfBody = table.Column<int>(type: "int", nullable: true),
-                    Equipment = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    HasGenerator = table.Column<bool>(type: "bit", nullable: true)
+                    Displacement = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_GroundVehicles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GroundVehicles_Buses_BusId",
+                        column: x => x.BusId,
+                        principalTable: "Buses",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_GroundVehicles_Campers_CamperId",
+                        column: x => x.CamperId,
+                        principalTable: "Campers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_GroundVehicles_DriveTypes_DriveId",
                         column: x => x.DriveId,
                         principalTable: "DriveTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_GroundVehicles_GroundVehicles_BusId",
-                        column: x => x.BusId,
-                        principalTable: "GroundVehicles",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_GroundVehicles_GroundVehicles_CamperId",
-                        column: x => x.CamperId,
-                        principalTable: "GroundVehicles",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -282,13 +302,15 @@ namespace MASFinal.Migrations
                 name: "IX_DriveTypes_CombustionEngineId",
                 table: "DriveTypes",
                 column: "CombustionEngineId",
-                unique: true);
+                unique: true,
+                filter: "[CombustionEngineId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DriveTypes_ElectricEngineId",
                 table: "DriveTypes",
                 column: "ElectricEngineId",
-                unique: true);
+                unique: true,
+                filter: "[ElectricEngineId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GroundVehicles_BusId",
@@ -358,6 +380,12 @@ namespace MASFinal.Migrations
 
             migrationBuilder.DropTable(
                 name: "Mechanics");
+
+            migrationBuilder.DropTable(
+                name: "Buses");
+
+            migrationBuilder.DropTable(
+                name: "Campers");
 
             migrationBuilder.DropTable(
                 name: "DriveTypes");

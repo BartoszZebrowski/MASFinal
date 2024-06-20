@@ -6,9 +6,52 @@
       xmlns:local="clr-namespace:MASFinal.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="VehiclesList">
-
+      Title="VehiclesList"
+      Background="Black">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
         
+        
+        <StackPanel Grid.Column="0" HorizontalAlignment="Center" Orientation="Vertical">
+            <Label Content="Pojazdy" Style="{StaticResource MainLabelStyle}"/>
+
+            <ListView Grid.Column="0" Name="userList" ItemsSource="{Binding Vehicles}" SelectionMode="Single" SelectedItem="{Binding SelectedVehicle}" BorderThickness="0">
+
+                <ListView.Resources>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Background" Value="Black"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        
+
+                    </Style>
+                </ListView.Resources>
+
+
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Marka" Width="70" DisplayMemberBinding="{Binding Brand}"/>
+                        <GridViewColumn Header="Model" Width="100" DisplayMemberBinding="{Binding Model}"/>
+                        <GridViewColumn Header="Koszt za dzień" Width="100" DisplayMemberBinding="{Binding DailyRentalPrice}"/>
+                        <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding DailyRentalPrice}"/>
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+
+        </StackPanel>
+
+        <StackPanel Grid.Column="2"  VerticalAlignment="Center" HorizontalAlignment="Center">
+            
+            <Button Content="Dodaj pojazd" Width="200" FontSize="20" Margin="10" Style="{StaticResource MainButtonStyle}"/>
+            <Button Content="Sprzedaj pojazd" Width="200" FontSize="20" Margin="10" Style="{StaticResource MainButtonStyle}"/>
+            <Button Content="Złomuj pojazd" Width="200" FontSize="20" Margin="10" Style="{StaticResource MainButtonStyle}"/>
+            <Button Content="Zarządzaj naprawami" Command="{Binding NavigateToVehicleDetails}" Width="250"  FontSize="20" Margin="40" Style="{StaticResource MainButtonStyle}"/>
+
+        </StackPanel>
     </Grid>
 </Page>

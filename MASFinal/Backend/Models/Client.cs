@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MASFinal.Backend.Models
 {
-    class Client : Person
+    public class Client : Person
     {
         public DateTime JoiningDate { get; private set; }
         public int Discount { get; private set; }

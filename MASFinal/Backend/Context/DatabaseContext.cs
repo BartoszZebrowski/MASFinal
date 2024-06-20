@@ -27,11 +27,24 @@ namespace MASFinal.Backend.Context
         public DbSet<Rent> Rents { get; set; }
         public DbSet<Repair> Repairs { get; set; }
 
+
+
+        private static DatabaseContext _instance = null;
+        public DatabaseContext() { }
+
+        public static DatabaseContext GetInstance()
+        {
+            if(_instance is null)
+                _instance = new DatabaseContext();
+
+            return _instance;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=(localdb)\\Local;Database=MAS;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=(localdb)\\Local;Database=MAS2;Trusted_Connection=True;");
             }
         }
 

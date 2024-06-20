@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MASFinal.Backend.Models;
+using MASFinal.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,8 +22,10 @@ namespace MASFinal.Views
     /// </summary>
     public partial class CreateRepairDetails : Page
     {
-        public CreateRepairDetails()
+        public CreateRepairDetails(GroundVehicle groundVehicle, DateTime dateFrom, DateTime dateTo)
         {
+            DataContext = new CreateRepairDetailsViewModel(groundVehicle, dateFrom, dateTo);
+
             InitializeComponent();
         }
     }

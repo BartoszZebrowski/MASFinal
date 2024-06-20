@@ -16,6 +16,41 @@
     </Page.Resources>
 
     <Grid>
-        <Button Style="{StaticResource MainButtonStyle}" Height="20" Content="Dodaj pojazd"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Ford Transit" Grid.Row="0" FontSize="30" VerticalAlignment="Center" Grid.ColumnSpan="3" Style="{StaticResource MainLabelStyle}"/>
+
+        <ListView Grid.Column="0" Grid.Row="1" Name="userList" ItemsSource="{Binding Vehicles}" SelectionMode="Single" SelectedItem="{Binding SelectedVehicle}" BorderThickness="0">
+
+            <ListView.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+
+
+                </Style>
+            </ListView.Resources>
+
+
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Imie" Width="70" DisplayMemberBinding="{Binding Brand}"/>
+                    <GridViewColumn Header="Nazwisko" Width="100" DisplayMemberBinding="{Binding Model}"/>
+                    <GridViewColumn Header="Wynagrodzenie" Width="100" DisplayMemberBinding="{Binding DailyRentalPrice}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Content="Wybierz mechanika" Width="200" FontSize="20" Margin="40" Style="{StaticResource MainButtonStyle}"/>
+
     </Grid>
 </Page>

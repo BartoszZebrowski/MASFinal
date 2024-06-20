@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MASFinal.Backend.Models
 {
-    enum BodyType
+    public enum BodyType
     {
         Common, 
         Cooler

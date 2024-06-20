@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MASFinal.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,10 @@ namespace MASFinal.Views
     {
         public VehiclesList()
         {
+            var vehicleListViewModel = new VehicleListViewModel();
+            DataContext = vehicleListViewModel;
+            vehicleListViewModel.LoadVehicles.Execute(null);
+
             InitializeComponent();
         }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MASFinal.Backend.Models
 {
-    class GroundVehicle : IVehicle
+    public class GroundVehicle : IVehicle
     {
         private Guid _id;
         public Guid Id
@@ -84,10 +84,36 @@ namespace MASFinal.Backend.Models
         public int NumberOfWheels { get; set; }
         public int RimSize { get; set; }
         public Bus? Bus { get; set; }
-        public Guid BusId { get; set; }
+        public Guid? BusId { get; set; }
         public Camper? Camper { get; set; }
-        public Guid CamperId { get; set; }
+        public Guid? CamperId { get; set; }
         public List<Repair> Repairs { get; private set; }
+
+        public GroundVehicle(string brand,
+            string model,
+            decimal dailyRentalPrice, 
+            int numberOfSeats,
+            DateTime productionDate,
+            int power,
+            int mileage,
+            DrivingLicencType category,
+            int numberOfWheels,
+            int rimSize)
+        {
+            Id = Guid.NewGuid();
+            Brand = brand;
+            Model = model;
+            DailyRentalPrice = dailyRentalPrice;
+            NumberOfSeats = numberOfSeats;
+            BuyDate = DateTime.Now;
+            ProductionDate = productionDate;
+            Power = power;
+            Rents = new();
+            Mileage = mileage;
+            Category = category;
+            NumberOfWheels = numberOfWheels;
+            RimSize = rimSize;
+        }
 
         public void ScrapVehicle(decimal price)
         {

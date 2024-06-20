@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MASFinal.Backend.Models
 {
-    class DriveType : Entity
+    public class DriveType : Entity
     {
         private Guid _id;
         public Guid Id

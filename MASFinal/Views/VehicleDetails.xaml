@@ -9,6 +9,82 @@
       Title="VehicleDetails">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+
+
+
+        <StackPanel Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            <Label FontSize="25" Content="Dane" Style="{StaticResource MainLabelStyle}"/>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Content="Marka:" Style="{StaticResource MainLabelStyle}"/>
+                <Label Content="Ford" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Content="Model:" Style="{StaticResource MainLabelStyle}"/>
+                <Label Content="Ford" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Content="Cena za dzień:" Style="{StaticResource MainLabelStyle}"/>
+                <Label Content="Ford" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Content="Typ:" Style="{StaticResource MainLabelStyle}"/>
+                <Label Content="Ford" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+            </StackPanel>
+            <Label FontSize="25" Content="" Style="{StaticResource MainLabelStyle}"/>
+
+            <Label FontSize="25" Content="Szczegóły" Style="{StaticResource MainLabelStyle}"/>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Content="Typ:" Style="{StaticResource MainLabelStyle}"/>
+                <Label Content="Ford" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Content="Typ:" Style="{StaticResource MainLabelStyle}"/>
+                <Label Content="Ford" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+            </StackPanel>
+
+
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Vertical">
+            <Label FontSize="25" Content="Naprawy" Style="{StaticResource MainLabelStyle}"/>
+
+            <ListView Height="310" Grid.Column="0" Name="userList" ItemsSource="{Binding Vehicles}" SelectionMode="Single" SelectedItem="{Binding SelectedVehicle}" BorderThickness="0">
+
+                <ListView.Resources>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Background" Value="Black"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </ListView.Resources>
+                
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Data rozpoczecia" Width="110" DisplayMemberBinding="{Binding Brand}"/>
+                        <GridViewColumn Header="Data zakończenia" Width="110" DisplayMemberBinding="{Binding Model}"/>
+                        <GridViewColumn Header="Koszt" Width="60" DisplayMemberBinding="{Binding DailyRentalPrice}"/>
+                        <GridViewColumn Header="Opis" Width="100" DisplayMemberBinding="{Binding DailyRentalPrice}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        <Button VerticalAlignment="Bottom" Content="Dodaj naprawę" Command="{Binding NavigateToRepairDateSelector}" Width="250"  FontSize="20" Margin="20" Style="{StaticResource MainButtonStyle}"/>
+
+
+        </StackPanel>
+
+
     </Grid>
 </Page>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MASFinal.Backend.Models;
+using MASFinal.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,8 +22,10 @@ namespace MASFinal.Views
     /// </summary>
     public partial class RepairDateSelector : Page
     {
-        public RepairDateSelector()
+        public RepairDateSelector(GroundVehicle groundVehicle)
         {
+
+            DataContext = new RepairDateSelectorViewModel(groundVehicle);
             InitializeComponent();
         }
     }

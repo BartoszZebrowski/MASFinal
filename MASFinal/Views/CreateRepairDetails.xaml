@@ -9,6 +9,29 @@
       Title="CreateRepairDetails">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Ford Transit" Grid.Row="0" FontSize="30" VerticalAlignment="Center" Grid.ColumnSpan="2" Style="{StaticResource MainLabelStyle}"/>
+
+        <TextBlock Text="dasdas" Grid.Row="1" Grid.Column="0"/>
+
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="dasdas" Grid.Row="1" Grid.Column="0"/>
+
+            <Button Content="Wybierz mechanika" Command="{Binding NavigateToMechanicSelector}" Width="220"  FontSize="20" Margin="20" Style="{StaticResource MainButtonStyle}"/>
+            <Button Content="Zapisz naprawę" Command="{Binding SaveRepair}" Width="220"  FontSize="20" Margin="20" Style="{StaticResource MainButtonStyle}"/>
+
+        </StackPanel>
+        
         
     </Grid>
 </Page>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MASFinal.Backend.Generic
 {
-    interface Entity
+    public interface Entity
     {
         [Key]
         public Guid Id { get; set; }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MASFinal.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240619110706_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240619141926_change1")]
+    partial class change1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -109,6 +109,41 @@ namespace MASFinal.Migrations
                     b.ToTable("Boats");
                 });
 
+            modelBuilder.Entity("MASFinal.Backend.Models.Bus", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("TrunkCapacity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("TypeOfBody")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Buses");
+                });
+
+            modelBuilder.Entity("MASFinal.Backend.Models.Camper", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Equipment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("HasGenerator")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Campers");
+                });
+
             modelBuilder.Entity("MASFinal.Backend.Models.Client", b =>
                 {
                     b.Property<Guid>("Id")
@@ -170,19 +205,21 @@ namespace MASFinal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CombustionEngineId")
+                    b.Property<Guid?>("CombustionEngineId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ElectricEngineId")
+                    b.Property<Guid?>("ElectricEngineId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CombustionEngineId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[CombustionEngineId] IS NOT NULL");
 
                     b.HasIndex("ElectricEngineId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ElectricEngineId] IS NOT NULL");
 
                     b.ToTable("DriveTypes");
                 });
@@ -214,13 +251,13 @@ namespace MASFinal.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("BusId")
+                    b.Property<Guid?>("BusId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("BuyDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("CamperId")
+                    b.Property<Guid?>("CamperId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Category")
@@ -262,10 +299,12 @@ namespace MASFinal.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BusId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[BusId] IS NOT NULL");
 
                     b.HasIndex("CamperId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[CamperId] IS NOT NULL");
 
                     b.HasIndex("DriveId");
 
@@ -405,33 +444,6 @@ namespace MASFinal.Migrations
                     b.HasDiscriminator().HasValue("Amphibian");
                 });
 
-            modelBuilder.Entity("MASFinal.Backend.Models.Bus", b =>
-                {
-                    b.HasBaseType("MASFinal.Backend.Models.GroundVehicle");
-
-                    b.Property<decimal>("TrunkCapacity")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("TypeOfBody")
-                        .HasColumnType("int");
-
-                    b.HasDiscriminator().HasValue("Bus");
-                });
-
-            modelBuilder.Entity("MASFinal.Backend.Models.Camper", b =>
-                {
-                    b.HasBaseType("MASFinal.Backend.Models.GroundVehicle");
-
-                    b.Property<string>("Equipment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("HasGenerator")
-                        .HasColumnType("bit");
-
-                    b.HasDiscriminator().HasValue("Camper");
-                });
-
             modelBuilder.Entity("MASFinal.Backend.Models.Boat", b =>
                 {
                     b.HasOne("MASFinal.Backend.Models.DriveType", "Drive")
@@ -458,15 +470,11 @@ namespace MASFinal.Migrations
                 {
                     b.HasOne("MASFinal.Backend.Models.CombustionEngine", "CombustionEngine")
                         .WithOne("Drive")
-                        .HasForeignKey("MASFinal.Backend.Models.DriveType", "CombustionEngineId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MASFinal.Backend.Models.DriveType", "CombustionEngineId");
 
                     b.HasOne("MASFinal.Backend.Models.ElectricEngine", "ElectricEngine")
                         .WithOne("Drive")
-                        .HasForeignKey("MASFinal.Backend.Models.DriveType", "ElectricEngineId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MASFinal.Backend.Models.DriveType", "ElectricEngineId");
 
                     b.Navigation("CombustionEngine");
 
@@ -478,14 +486,12 @@ namespace MASFinal.Migrations
                     b.HasOne("MASFinal.Backend.Models.Bus", "Bus")
                         .WithOne("GroundVehicle")
                         .HasForeignKey("MASFinal.Backend.Models.GroundVehicle", "BusId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("MASFinal.Backend.Models.Camper", "Camper")
                         .WithOne("GroundVehicle")
                         .HasForeignKey("MASFinal.Backend.Models.GroundVehicle", "CamperId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("MASFinal.Backend.Models.DriveType", "Drive")
                         .WithMany()
@@ -552,6 +558,18 @@ namespace MASFinal.Migrations
                     b.Navigation("Rents");
                 });
 
+            modelBuilder.Entity("MASFinal.Backend.Models.Bus", b =>
+                {
+                    b.Navigation("GroundVehicle")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MASFinal.Backend.Models.Camper", b =>
+                {
+                    b.Navigation("GroundVehicle")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("MASFinal.Backend.Models.Client", b =>
                 {
                     b.Navigation("Rents");
@@ -579,18 +597,6 @@ namespace MASFinal.Migrations
             modelBuilder.Entity("MASFinal.Backend.Models.Mechanic", b =>
                 {
                     b.Navigation("Repairs");
-                });
-
-            modelBuilder.Entity("MASFinal.Backend.Models.Bus", b =>
-                {
-                    b.Navigation("GroundVehicle")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MASFinal.Backend.Models.Camper", b =>
-                {
-                    b.Navigation("GroundVehicle")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

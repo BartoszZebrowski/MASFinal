@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MASFinal.Backend.Models
 {
-    class Bus : GroundVehicle, Entity
+    public class Bus : Entity
     {
         private Guid _id;
         public Guid Id
