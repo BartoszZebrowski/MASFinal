@@ -2,10 +2,11 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MASFinal.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="375" d:DesignWidth="800"
       Title="CreateRepairDetails">
 
     <Grid>
@@ -21,17 +22,28 @@
 
         <Label Content="Ford Transit" Grid.Row="0" FontSize="30" VerticalAlignment="Center" Grid.ColumnSpan="2" Style="{StaticResource MainLabelStyle}"/>
 
-        <TextBlock Text="dasdas" Grid.Row="1" Grid.Column="0"/>
+        
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <Label Content="Opis" Margin="15,0,20,0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2" Style="{StaticResource MainLabelStyle}"/>
+
+            <TextBlock Margin="20,0,20,0" Height="Auto" MinHeight="200" TextWrapping="Wrap" Background="White" Padding="5" Text="Opis"/>
+
+        </StackPanel>
+
+
+
 
 
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <TextBlock Text="dasdas" Grid.Row="1" Grid.Column="0"/>
+
+            <Label Content="Kwota za naprawę" Margin="15,0,20,0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2" Style="{StaticResource MainLabelStyle}"/>
+
+            <TextBlock Margin="20,0,20,0" Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Background="White" Padding="5"/>
+
 
             <Button Content="Wybierz mechanika" Command="{Binding NavigateToMechanicSelector}" Width="220"  FontSize="20" Margin="20" Style="{StaticResource MainButtonStyle}"/>
             <Button Content="Zapisz naprawę" Command="{Binding SaveRepair}" Width="220"  FontSize="20" Margin="20" Style="{StaticResource MainButtonStyle}"/>
 
         </StackPanel>
-        
-        
     </Grid>
 </Page>

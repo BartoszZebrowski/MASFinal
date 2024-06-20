@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MASFinal.Backend.Models;
+using MASFinal.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,7 @@ namespace MASFinal.Views
     {
         public MechanicSelector()
         {
+            DataContext = new MechanicSelectorViewModel();
             InitializeComponent();
         }
     }

@@ -88,6 +88,17 @@ namespace MASFinal.Backend.Models
         public Camper? Camper { get; set; }
         public Guid? CamperId { get; set; }
         public List<Repair> Repairs { get; private set; }
+        public string Type
+        {
+            get 
+            {
+                if (Bus is not null)
+                    return "Bus";
+                else
+                    return "Camper";
+            }
+            set => throw new NotImplementedException();
+        }
 
         public GroundVehicle(string brand,
             string model,

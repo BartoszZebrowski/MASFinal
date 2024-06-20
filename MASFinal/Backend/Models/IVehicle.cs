@@ -19,6 +19,7 @@ namespace MASFinal.Backend.Models
 
         public DriveType Drive { get; set; }
         public List<Rent> Rents { get; set; }
+        public string Type { get; set; }
 
         public void SellVehicle(decimal price);
         public void ScrapVehicle(decimal price);

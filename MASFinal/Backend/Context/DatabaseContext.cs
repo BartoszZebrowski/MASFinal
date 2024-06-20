@@ -54,6 +54,10 @@ namespace MASFinal.Backend.Context
 
             modelBuilder.Entity<Rent>().Ignore(r => r.Vehicle);
 
+            modelBuilder.Entity<GroundVehicle>().Ignore(r => r.Type);
+            modelBuilder.Entity<Boat>().Ignore(r => r.Type);
+            modelBuilder.Entity<Amphibian>().Ignore(r => r.Type);
+
             modelBuilder.Entity<CombustionEngine>()
                 .HasOne(ce => ce.Drive)
                 .WithOne(d => d.CombustionEngine)

@@ -24,7 +24,6 @@ namespace MASFinal.Views
     {
         public RepairDateSelector(GroundVehicle groundVehicle)
         {
-
             DataContext = new RepairDateSelectorViewModel(groundVehicle);
             InitializeComponent();
         }

@@ -4,9 +4,48 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MASFinal.Views"
+      xmlns:my="clr-namespace:MASFinal.Views.Common"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="375" d:DesignWidth="800"
       Title="VehicleDetails">
+
+    <Page.Resources>
+        <DataTemplate x:Key="BusTemplate">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Content="Marka:" Style="{StaticResource MainLabelStyle}"/>
+                <Label Content="{Binding GroundVehicle.Brand}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="CamperTemplate">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Content="Marka:" Style="{StaticResource MainLabelStyle}"/>
+                <Label Content="{Binding Camper.Equipment}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="AmphibianTemplate">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Content="Marka:" Style="{StaticResource MainLabelStyle}"/>
+                <Label Content="{Binding GroundVehicle.Model}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="BoatTemplate">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Content="Marka:" Style="{StaticResource MainLabelStyle}"/>
+                <Label Content="{Binding Brand}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+            </StackPanel>
+        </DataTemplate>
+
+        <my:VehicleTemplateSelector x:Key="VehicleTemplateSelector"
+                                       BusTemplate="{StaticResource BusTemplate}"
+                                       CamperTemplate="{StaticResource CamperTemplate}"
+                                       BoatTemplate="{StaticResource BoatTemplate}"
+                                       AmphibianTemplate="{StaticResource AmphibianTemplate}"/>
+
+
+    </Page.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -23,44 +62,34 @@
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Label Content="Marka:" Style="{StaticResource MainLabelStyle}"/>
-                <Label Content="Ford" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+                <Label Content="{Binding GroundVehicle.Brand}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Label Content="Model:" Style="{StaticResource MainLabelStyle}"/>
-                <Label Content="Ford" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+                <Label Content="{Binding GroundVehicle.Model}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Label Content="Cena za dzień:" Style="{StaticResource MainLabelStyle}"/>
-                <Label Content="Ford" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+                <Label Content="{Binding GroundVehicle.DailyRentalPrice}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Label Content="Typ:" Style="{StaticResource MainLabelStyle}"/>
-                <Label Content="Ford" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+                <Label Content="{Binding GroundVehicle.Type}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
             </StackPanel>
-            <Label FontSize="25" Content="" Style="{StaticResource MainLabelStyle}"/>
 
             <Label FontSize="25" Content="Szczegóły" Style="{StaticResource MainLabelStyle}"/>
 
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Label Content="Typ:" Style="{StaticResource MainLabelStyle}"/>
-                <Label Content="Ford" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Label Content="Typ:" Style="{StaticResource MainLabelStyle}"/>
-                <Label Content="Ford" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
-            </StackPanel>
-
+            <ContentControl Content="{Binding GroundVehicle}" ContentTemplateSelector="{StaticResource VehicleTemplateSelector}"/>
 
         </StackPanel>
 
         <StackPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Vertical">
             <Label FontSize="25" Content="Naprawy" Style="{StaticResource MainLabelStyle}"/>
 
-            <ListView Height="310" Grid.Column="0" Name="userList" ItemsSource="{Binding Vehicles}" SelectionMode="Single" SelectedItem="{Binding SelectedVehicle}" BorderThickness="0">
+            <ListView Height="230" Grid.Column="0" Name="userList" ItemsSource="{Binding Vehicles}" SelectionMode="Single" SelectedItem="{Binding SelectedVehicle}" BorderThickness="0">
 
                 <ListView.Resources>
                     <Style TargetType="ListViewItem">

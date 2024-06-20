@@ -94,6 +94,11 @@ namespace MASFinal.Backend.Models
 
         public bool HasSail { get; set; }
         public bool CanSleep { get; set; }
+        public string Type 
+        { 
+            get => "Boat";
+            set => throw new NotImplementedException();
+        }
 
         public void SellVehicle(decimal price)
         {

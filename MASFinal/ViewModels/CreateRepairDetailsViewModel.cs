@@ -41,6 +41,9 @@ namespace MASFinal.ViewModels
         {
             Repair.CreateRepair(Mechanic, GroundVehicle, DateFrom, DateTo, Price, Descritpion);
 
+
+
+
             // uzyc serwisu do zapisywania samochodu 
         }
     }

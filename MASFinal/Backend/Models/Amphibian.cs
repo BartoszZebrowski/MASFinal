@@ -19,6 +19,12 @@ namespace MASFinal.Backend.Models
             set => _requiresHelmsmanLicense = value;
         }
 
+        public string Type
+        {
+            get => "Amphibian";
+            set => throw new NotImplementedException();
+        }
+
         private decimal _displacment;
 
         public Amphibian(string brand, string model, decimal dailyRentalPrice, int numberOfSeats, DateTime productionDate, int power, int mileage, DrivingLicencType category, int numberOfWheels, int rimSize) : base(brand, model, dailyRentalPrice, numberOfSeats, productionDate, power, mileage, category, numberOfWheels, rimSize)

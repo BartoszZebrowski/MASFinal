@@ -22,10 +22,9 @@ namespace MASFinal.Views
     /// </summary>
     public partial class VehicleDetails : Page
     {
-        public VehicleDetails(GroundVehicle groundVehicle)
+        public VehicleDetails(IVehicle groundVehicle)
         {
             DataContext = new VehicleDetailsViewModel(groundVehicle);
-
             InitializeComponent();
         }
     }

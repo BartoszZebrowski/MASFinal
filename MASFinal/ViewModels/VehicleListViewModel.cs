@@ -14,8 +14,8 @@ namespace MASFinal.ViewModels
 {
     class VehicleListViewModel : NotifyPropertyChanged
     {
-        public List<GroundVehicle> Vehicles { get; set; }
-        public GroundVehicle SelectedVehicle { get; set; }
+        public List<IVehicle> Vehicles { get; set; }
+        public IVehicle SelectedVehicle { get; set; }
         public ICommand LoadVehicles { get; private set; }
         public ICommand NavigateToVehicleDetails { get; private set; }
 
@@ -33,12 +33,30 @@ namespace MASFinal.ViewModels
 
         private async Task GetVehicles()
         {
-            Vehicles = await DatabaseContext.GetInstance().GroundVehicles.ToListAsync();
+            var groundVehicles = await DatabaseContext.GetInstance().GroundVehicles
+                .Include(gv => gv.Bus)
+                .Include(gv => gv.Camper)
+                .ToListAsync();
+
+            var amphibians = await DatabaseContext.GetInstance().Amphibians
+                .ToListAsync();
+
+            var boats = await DatabaseContext.GetInstance().Boats
+                .ToListAsync();
+
+            List<IVehicle> vehicles = new List<IVehicle>();
+
+            vehicles.AddRange(groundVehicles);
+            vehicles.AddRange(amphibians);
+            vehicles.AddRange(boats);
+
+            Vehicles = vehicles;
+
 
             OnPropertyChanged();
             //GroundVehicle vehicle = new GroundVehicle(
-            //    "BWM",           // brand
-            //    "M5",            // model
+            //    "Saab",           // brand
+            //    "93",            // model
             //    150.50m,            // dailyRentalPrice
             //    5,                  // numberOfSeats
             //    new DateTime(2018, 5, 15),  // productionDate
@@ -49,8 +67,9 @@ namespace MASFinal.ViewModels
             //    18                  // rimSize
             //);
             //DriveType.CreateElectricDrive(vehicle, 20, 30);
+            //Camper.CreateCamper(vehicle, "dasdasd", true);
 
-            //Vehicles.Add( vehicle );    
+            //Vehicles.Add(vehicle);
 
 
             //await DatabaseContext.GetInstance().GroundVehicles.AddAsync(vehicle);
