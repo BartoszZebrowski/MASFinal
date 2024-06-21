@@ -10,12 +10,12 @@ using System.Windows.Input;
 
 namespace MASFinal.ViewModels
 {
-    class CreateRepairDetailsViewModel : NotifyPropertyChanged
+    public class CreateRepairDetailsViewModel : NotifyPropertyChanged
     {
         public GroundVehicle GroundVehicle { get; set; }
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
-        public Mechanic Mechanic { get; set; }
+        public Mechanic? Mechanic { get; set; }
         public string Descritpion { get; set; }
         public decimal Price { get; set; }
 
@@ -30,7 +30,7 @@ namespace MASFinal.ViewModels
             DateTo = dateTo;
 
             NavigateToSelectMechanic = new RelayCommand(
-                _ => MainWindowViewModel.GetInstance().ChangePage(new MechanicSelector()));
+                _ => new MechanicSelectorWindow(this).ShowDialog());
 
             SaveRepairCommand = new RelayCommand(
                 _ => SaveRepair());

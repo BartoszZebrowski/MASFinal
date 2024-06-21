@@ -20,12 +20,17 @@ namespace MASFinal.Views
     /// <summary>
     /// Interaction logic for MechanicSelector.xaml
     /// </summary>
-    public partial class MechanicSelector : Page
+    public partial class MechanicSelectorWindow : Window
     {
-        public MechanicSelector()
+        public MechanicSelectorWindow(CreateRepairDetailsViewModel createRepairDetailsViewModel)
         {
-            DataContext = new MechanicSelectorViewModel();
+            DataContext = new MechanicSelectorViewModel(createRepairDetailsViewModel);
             InitializeComponent();
+        }
+
+        private void OnSelectMechanic(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

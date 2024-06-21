@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MASFinal.ViewModels.Common
 {
-    class NotifyPropertyChanged : INotifyPropertyChanged
+    public class NotifyPropertyChanged : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

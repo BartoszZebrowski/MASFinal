@@ -22,10 +22,24 @@ namespace MASFinal.Views
     /// </summary>
     public partial class RepairDateSelector : Page
     {
+        private RepairDateSelectorViewModel _repairDateSelectorViewModel1;
+
         public RepairDateSelector(GroundVehicle groundVehicle)
         {
-            DataContext = new RepairDateSelectorViewModel(groundVehicle);
+            _repairDateSelectorViewModel1 = new RepairDateSelectorViewModel(groundVehicle);
+            DataContext = _repairDateSelectorViewModel1;
+
+            _repairDateSelectorViewModel1.PropertyChanged += OnPropertyChange;
+
             InitializeComponent();
+        }
+
+        private void OnPropertyChange(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (_repairDateSelectorViewModel1.IsRented)
+                _errorMessage.Visibility = Visibility.Visible;
+            else
+                _errorMessage.Visibility = Visibility.Hidden;
         }
     }
 }

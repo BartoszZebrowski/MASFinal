@@ -24,9 +24,9 @@
 
         
         <StackPanel Grid.Row="1" Grid.Column="0">
-            <Label Content="Opis" Margin="15,0,20,0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2" Style="{StaticResource MainLabelStyle}"/>
+            <Label  Margin="15,0,20,0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2" Style="{StaticResource MainLabelStyle}"/>
 
-            <TextBlock Margin="20,0,20,0" Height="Auto" MinHeight="200" TextWrapping="Wrap" Background="White" Padding="5" Text="Opis"/>
+            <TextBox  Margin="20,0,20,0" Height="Auto" MinHeight="200" TextWrapping="Wrap" Background="White" Padding="5" Text="Opis"/>
 
         </StackPanel>
 
@@ -38,7 +38,7 @@
 
             <Label Content="Kwota za naprawę" Margin="15,0,20,0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2" Style="{StaticResource MainLabelStyle}"/>
 
-            <TextBlock Margin="20,0,20,0" Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Background="White" Padding="5"/>
+            <TextBox Margin="20,0,20,0" Grid.Row="1" Grid.Column="0" TextWrapping="NoWrap" Background="White" Padding="5"/>
 
 
             <Button Content="Wybierz mechanika" Command="{Binding NavigateToMechanicSelector}" Width="220"  FontSize="20" Margin="20" Style="{StaticResource MainButtonStyle}"/>

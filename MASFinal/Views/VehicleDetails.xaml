@@ -19,8 +19,10 @@
 
         <DataTemplate x:Key="CamperTemplate">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Label Content="Marka:" Style="{StaticResource MainLabelStyle}"/>
+                <Label Content="Wyposażenie:" Style="{StaticResource MainLabelStyle}"/>
                 <Label Content="{Binding Camper.Equipment}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+                <Label Content="Czy ma generator:" Style="{StaticResource MainLabelStyle}"/>
+                <Label Content="{Binding Camper.HasGenerator}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
             </StackPanel>
         </DataTemplate>
 
@@ -62,27 +64,27 @@
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Label Content="Marka:" Style="{StaticResource MainLabelStyle}"/>
-                <Label Content="{Binding GroundVehicle.Brand}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+                <Label Content="{Binding Vehicle.Brand}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Label Content="Model:" Style="{StaticResource MainLabelStyle}"/>
-                <Label Content="{Binding GroundVehicle.Model}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+                <Label Content="{Binding Vehicle.Model}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Label Content="Cena za dzień:" Style="{StaticResource MainLabelStyle}"/>
-                <Label Content="{Binding GroundVehicle.DailyRentalPrice}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+                <Label Content="{Binding Vehicle.DailyRentalPrice}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Label Content="Typ:" Style="{StaticResource MainLabelStyle}"/>
-                <Label Content="{Binding GroundVehicle.Type}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+                <Label Content="{Binding Vehicle.Type}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
             </StackPanel>
 
             <Label FontSize="25" Content="Szczegóły" Style="{StaticResource MainLabelStyle}"/>
 
-            <ContentControl Content="{Binding GroundVehicle}" ContentTemplateSelector="{StaticResource VehicleTemplateSelector}"/>
+            <ContentControl Content="{Binding Vehicle}" ContentTemplateSelector="{StaticResource VehicleTemplateSelector}"/>
 
         </StackPanel>
 

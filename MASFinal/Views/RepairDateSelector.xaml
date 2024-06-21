@@ -6,6 +6,8 @@
       xmlns:local="clr-namespace:MASFinal.Views"
       mc:Ignorable="d" 
       d:DesignHeight="375" d:DesignWidth="800"
+      Width="Auto"
+      Height="Auto"
       Title="RepairDateSelector">
 
     <Grid>
@@ -27,25 +29,19 @@
 
         <StackPanel Grid.Row="1" Grid.Column="0">
             <Label Content="Od" FontSize="25" Style="{StaticResource MainLabelStyle}"/>
-
-            <DatePicker  />
-
+            <DatePicker SelectedDate="{Binding DateFrom}" />
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
             <Button Content="Wybierz date" Command="{Binding NavigateToCreateRepairDetails}" Width="220"  FontSize="20" Margin="20" Style="{StaticResource MainButtonStyle}"/>
-
-
+            
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="2">
             <Label Content="Do" FontSize="25" Style="{StaticResource MainLabelStyle}"/>
-
-            <DatePicker />
-
-
+            <DatePicker  SelectedDate="{Binding DateTo}" />
         </StackPanel>
 
-        <Label Grid.Row="2" VerticalAlignment="Center" Foreground="Red" Grid.ColumnSpan="3" Content="Do" FontSize="25" Style="{StaticResource MainLabelStyle}"/>
+        <Label x:Name="_errorMessage" Grid.Row="2" VerticalAlignment="Center" Foreground="Red" Grid.ColumnSpan="3" Content="W wybranym terminie pojazd jest wyporzyczony! " FontSize="25" Style="{StaticResource MainLabelStyle}"/>
     </Grid>
 </Page>

@@ -13,7 +13,7 @@ namespace MASFinal.ViewModels
     class VehicleDetailsViewModel : NotifyPropertyChanged
     {
         private IVehicle _groundVehicle;
-        public IVehicle GroundVehicle
+        public IVehicle Vehicle
         {
             get => _groundVehicle;
             set => SetField(ref _groundVehicle, value);
@@ -22,12 +22,13 @@ namespace MASFinal.ViewModels
 
         public VehicleDetailsViewModel(IVehicle groundVehicle)
         {
-            GroundVehicle = groundVehicle;
+            Vehicle = groundVehicle;
 
-            //NavigateToRepairDateSelector = new RelayCommand(
-            //    _ => MainWindowViewModel.GetInstance().ChangePage(new RepairDateSelector(GroundVehicle)));
+            NavigateToRepairDateSelector = new RelayCommand(
+                _ => MainWindowViewModel.GetInstance().ChangePage(new RepairDateSelector(Vehicle as GroundVehicle)),
+                _ => Vehicle.Type == "Bus" || Vehicle.Type == "Camper");
 
-            OnPropertyChanged(nameof(GroundVehicle));
+            OnPropertyChanged(nameof(Vehicle));
         }
     }
 }

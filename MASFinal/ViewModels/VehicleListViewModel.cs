@@ -3,11 +3,6 @@ using MASFinal.Backend.Models;
 using MASFinal.ViewModels.Common;
 using MASFinal.Views;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MASFinal.ViewModels

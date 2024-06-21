@@ -12,14 +12,30 @@ namespace MASFinal.ViewModels
 {
     class RepairDateSelectorViewModel : NotifyPropertyChanged
     {
+        public GroundVehicle GroundVehicle { get; set; }
 
         public ICommand NavigateToCreateRepairDetails { get; set; }
 
-        public GroundVehicle GroundVehicle { get; set; }
-        public DateTime DateFrom { get; set; }
-        public DateTime DateTo { get; set; }
+        private bool _isRented;
+        public bool IsRented
+        {
+            get => _isRented;
+            set => SetField(ref _isRented, value);
+        }
 
+        private DateTime? _dateFrom;
+        public DateTime? DateFrom
+        {
+            get => _dateFrom;
+            set => SetField(ref _dateFrom, value);
+        }
 
+        private DateTime? _dateTo;
+        public DateTime? DateTo
+        {
+            get => _dateTo;
+            set => SetField(ref _dateTo, value);
+        }
 
         public RepairDateSelectorViewModel(GroundVehicle groundVehicle)
         {
@@ -27,7 +43,17 @@ namespace MASFinal.ViewModels
 
 
             NavigateToCreateRepairDetails = new RelayCommand(
-                _ => MainWindowViewModel.GetInstance().ChangePage(new CreateRepairDetails(GroundVehicle, DateFrom, DateTo)));
+                _ => SelectDateRepair(),
+                _ => DateFrom != null && DateTo != null);
+        }
+
+        private void SelectDateRepair()
+        {
+            // sprawdzic czy jest wporzyczony
+
+            IsRented = false;
+
+            MainWindowViewModel.GetInstance().ChangePage(new CreateRepairDetails(GroundVehicle, (DateTime)DateFrom, (DateTime)DateTo));
         }
     }
 }
