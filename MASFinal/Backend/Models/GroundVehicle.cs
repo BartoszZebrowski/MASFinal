@@ -1,8 +1,10 @@
-﻿using System;
+﻿using MASFinal.Backend.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Media3D;
 
 namespace MASFinal.Backend.Models
 {
@@ -71,12 +73,14 @@ namespace MASFinal.Backend.Models
             set { _drive = value; }
         }
 
-        private List<Rent> _rents;
+        private List<Rent> _rents = new ();
         public List<Rent> Rents
         {
             get { return _rents ??= new List<Rent>(); }
             set { _rents = value; }
         }
+
+        public string FullName => Brand + " " + Model;
 
         ////////////
         public int Mileage { get; set; }
@@ -87,7 +91,7 @@ namespace MASFinal.Backend.Models
         public Guid? BusId { get; set; }
         public Camper? Camper { get; set; }
         public Guid? CamperId { get; set; }
-        public List<Repair> Repairs { get; private set; }
+        public List<Repair> Repairs { get; private set; } = new();
         public string Type
         {
             get 
@@ -103,6 +107,66 @@ namespace MASFinal.Backend.Models
         public GroundVehicle(string brand,
             string model,
             decimal dailyRentalPrice, 
+            int numberOfSeats,
+            DateTime productionDate,
+            int power,
+            int mileage,
+            DrivingLicencType category,
+            int numberOfWheels,
+            int rimSize,
+            decimal trunkCapacity,
+            BodyType typeOfBody)
+        {
+            Id = Guid.NewGuid();
+            Brand = brand;
+            Model = model;
+            DailyRentalPrice = dailyRentalPrice;
+            NumberOfSeats = numberOfSeats;
+            BuyDate = DateTime.Now;
+            ProductionDate = productionDate;
+            Power = power;
+            Rents = new();
+            Mileage = mileage;
+            Category = category;
+            NumberOfWheels = numberOfWheels;
+            RimSize = rimSize;
+
+            Bus.CreateBus(this, trunkCapacity, typeOfBody);
+        }
+
+        public GroundVehicle(string brand,
+            string model,
+            decimal dailyRentalPrice,
+            int numberOfSeats,
+            DateTime productionDate,
+            int power,
+            int mileage,
+            DrivingLicencType category,
+            int numberOfWheels,
+            int rimSize,
+            string equipment,
+            bool hasGenerator)
+        {
+            Id = Guid.NewGuid();
+            Brand = brand;
+            Model = model;
+            DailyRentalPrice = dailyRentalPrice;
+            NumberOfSeats = numberOfSeats;
+            BuyDate = DateTime.Now;
+            ProductionDate = productionDate;
+            Power = power;
+            Rents = new();
+            Mileage = mileage;
+            Category = category;
+            NumberOfWheels = numberOfWheels;
+            RimSize = rimSize;
+
+            Camper.CreateCamper(this, equipment, hasGenerator);
+        }
+
+        public GroundVehicle(string brand,
+            string model,
+            decimal dailyRentalPrice,
             int numberOfSeats,
             DateTime productionDate,
             int power,
@@ -137,20 +201,22 @@ namespace MASFinal.Backend.Models
         }
         public void SetBus(Bus bus)
         {
-            if(Camper is not null)
+            if(Bus is not null)
                 throw new Exception("Can't set Bus when Camper is not null");
 
-            // dodac sprawdzenie czy gdzies juz sa przyczepione !!!!
+            if (new VehicleRepository().GetAllBuses().Any(b => b.Id == bus.Id))
+                throw new Exception("This bus is set to other groudnVehicle");
 
             Bus = bus;
         }
 
         public void SetCamper(Camper camper)
         {
-            if (Bus is not null)
+            if (Camper is not null)
                 throw new Exception("Can't set Camper when Bus is not null");
-
-            // dodac sprawdzenie czy gdzies juz sa przyczepione !!!!
+            
+            if (new VehicleRepository().GetAllCampers().Any(c => c.Id == camper.Id))
+                throw new Exception("This Camper is set to other groudnVehicle");
 
             Camper = camper;
         }   
@@ -160,13 +226,17 @@ namespace MASFinal.Backend.Models
             if (Bus is null)
                 throw new Exception("This is not a Bus");
 
-            Bus = null; //pousuwac z ekstensji !!!!
             Camper.CreateCamper(this, equipment, hasGenerator);
+            new VehicleRepository().ChangeBusToCamper(Bus, Camper);
         }
 
         public void AddRepair(Repair repair)
         {
-            // dodac sprawdzenie czy gdzies juz sa przyczepione !!!!
+            if (repair is null)
+                throw new Exception("Reapir can't be null");
+
+            if (new SchedulRepository().GetAllRepairs().Any(r => r.Id == repair.Id))
+                throw new Exception("This Reapir is set to other groudnVehicle");
 
             Repairs.Add(repair);
         }

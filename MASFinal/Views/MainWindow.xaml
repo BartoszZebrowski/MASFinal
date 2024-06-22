@@ -1,7 +1,7 @@
 ﻿<Window x:Class="MASFinal.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Uśmiechnięta Wypożyczalnia" Height="375" Width="800" Background="Black">
+        Title="Uśmiechnięta Wypożyczalnia" Height="550" Width="900" Background="Black">
     <Grid>
 
         <Grid.RowDefinitions>

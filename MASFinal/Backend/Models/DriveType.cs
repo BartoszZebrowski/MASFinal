@@ -1,4 +1,5 @@
 ﻿using MASFinal.Backend.Generic;
+using MASFinal.Backend.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,7 +66,8 @@ namespace MASFinal.Backend.Models
             if (combustionEngine is null)
                 throw new ArgumentNullException("Combustion Engine can't be null!");
 
-            // dodac sprawdzenie czy gdzies juz sa przyczepione !!!!
+            if(new VehicleRepository().GetAllDrives().Any(d => d.Id == combustionEngine.Id))
+                throw new ArgumentNullException("This drive type is setted to vehicle!");
 
             CombustionEngine = combustionEngine;
         }
@@ -75,7 +77,8 @@ namespace MASFinal.Backend.Models
             if (electricEngine is null)
                 throw new ArgumentNullException("Electric Engine can't be null!");
 
-            // dodac sprawdzenie czy gdzies juz sa przyczepione !!!!
+            if (new VehicleRepository().GetAllDrives().Any(d => d.Id == electricEngine.Id))
+                throw new ArgumentNullException("This drive type is setted to vehicle!");
 
             ElectricEngine = electricEngine;
         }

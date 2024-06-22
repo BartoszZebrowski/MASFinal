@@ -1,4 +1,5 @@
 ﻿using MASFinal.Backend.Models;
+using MASFinal.Backend.Services;
 using MASFinal.ViewModels.Common;
 using MASFinal.Views;
 using System;
@@ -12,16 +13,29 @@ namespace MASFinal.ViewModels
 {
     public class CreateRepairDetailsViewModel : NotifyPropertyChanged
     {
+
         public GroundVehicle GroundVehicle { get; set; }
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
         public Mechanic? Mechanic { get; set; }
-        public string Descritpion { get; set; }
-        public decimal Price { get; set; }
 
+
+        private string _descritpion;
+        public string Descritpion 
+        { 
+            get => _descritpion;
+            set => SetField(ref _descritpion, value);
+        }
+        
+        private decimal _price;
+        public decimal Price 
+        { 
+            get => _price; 
+            set => SetField(ref _price, value); 
+        }
 
         public ICommand SaveRepairCommand { get; set; }
-        public ICommand NavigateToSelectMechanic { get; set; }
+        public ICommand NavigateToMechanicSelector { get; set; }
 
         public CreateRepairDetailsViewModel(GroundVehicle groundVehicle, DateTime dateFrom, DateTime dateTo)
         {
@@ -29,7 +43,7 @@ namespace MASFinal.ViewModels
             DateFrom = dateFrom;
             DateTo = dateTo;
 
-            NavigateToSelectMechanic = new RelayCommand(
+            NavigateToMechanicSelector = new RelayCommand(
                 _ => new MechanicSelectorWindow(this).ShowDialog());
 
             SaveRepairCommand = new RelayCommand(
@@ -41,10 +55,8 @@ namespace MASFinal.ViewModels
         {
             Repair.CreateRepair(Mechanic, GroundVehicle, DateFrom, DateTo, Price, Descritpion);
 
-
-
-
-            // uzyc serwisu do zapisywania samochodu 
+            new SchedulRepository().AddRepair(GroundVehicle);
+            MainWindowViewModel.GetInstance().ChangePage(new VehiclesList());
         }
     }
 }

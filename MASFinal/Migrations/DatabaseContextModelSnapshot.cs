@@ -176,7 +176,7 @@ namespace MASFinal.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("Client");
+                    b.ToTable("Clients");
                 });
 
             modelBuilder.Entity("MASFinal.Backend.Models.CombustionEngine", b =>

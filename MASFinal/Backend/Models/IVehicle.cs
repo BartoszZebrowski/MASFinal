@@ -1,4 +1,5 @@
 ﻿using MASFinal.Backend.Generic;
+using MASFinal.Backend.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,11 @@ namespace MASFinal.Backend.Models
         public void AddRent(Rent rent) => Rents.Add(rent);
         public void SetDriveType(DriveType drive)
         {
-            // dodac sprawdzenie czy gdzies juz sa przyczepione !!!!
+            if(drive == null)
+                throw new ArgumentNullException("Drive can't be null");
+
+            if (new VehicleRepository().GetAllDrives().Any(d => d.Id == drive.Id))
+                throw new ArgumentNullException("This drive type is setted to vehicle!");
 
             Drive = drive;
         }

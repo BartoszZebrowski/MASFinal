@@ -11,7 +11,7 @@ namespace MASFinal.Backend.Models
         public DateTime DateOfEmployment { get; set; }
         public decimal GrossSalary { get; set; }
         public static decimal MaxBonus { get; set; }
-        public List<Repair> Repairs { get; private set; }
+        public List<Repair> Repairs { get; private set; } = new();
 
         public Mechanic(DateTime dateOfEmployment, decimal grossSalary, string firstName, string lastName, Address address, string email, string phoneNumber) 
             : base(firstName, lastName, address, email, phoneNumber)

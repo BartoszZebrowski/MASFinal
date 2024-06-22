@@ -28,7 +28,7 @@ namespace MASFinal.Backend.Models
 
         private Bus() { }
 
-        public static void CreateCamper(GroundVehicle groundVehicle, decimal trunkCapacity, BodyType typeOfBody)
+        public static void CreateBus(GroundVehicle groundVehicle, decimal trunkCapacity, BodyType typeOfBody)
         {
             if (groundVehicle is null)
                 throw new ArgumentNullException("Ground Vehicle can't be null!");

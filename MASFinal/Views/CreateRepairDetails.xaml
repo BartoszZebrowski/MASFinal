@@ -6,7 +6,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MASFinal.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="375" d:DesignWidth="800"
+      d:DesignHeight="375"
+      d:DesignWidth="800"
+      Width="Auto"
+      Height="Auto"
+      MinWidth="800"
+      MinHeight="375"
       Title="CreateRepairDetails">
 
     <Grid>
@@ -20,30 +25,20 @@
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
 
-        <Label Content="Ford Transit" Grid.Row="0" FontSize="30" VerticalAlignment="Center" Grid.ColumnSpan="2" Style="{StaticResource MainLabelStyle}"/>
+        <Label Content="{Binding GroundVehicle.FullName}" Grid.Row="0" FontSize="30" VerticalAlignment="Center" Grid.ColumnSpan="2" Style="{StaticResource MainLabelStyle}"/>
 
         
         <StackPanel Grid.Row="1" Grid.Column="0">
-            <Label  Margin="15,0,20,0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2" Style="{StaticResource MainLabelStyle}"/>
-
-            <TextBox  Margin="20,0,20,0" Height="Auto" MinHeight="200" TextWrapping="Wrap" Background="White" Padding="5" Text="Opis"/>
-
+            <Label Content="Opis"  Margin="15,0,20,0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2" Style="{StaticResource MainLabelStyle}"/>
+            <TextBox  Margin="20,0,20,0" Height="Auto" MinHeight="200" TextWrapping="Wrap" Background="White" Padding="5" Text="{Binding Descritpion}"/>
         </StackPanel>
 
-
-
-
-
         <StackPanel Grid.Row="1" Grid.Column="1">
-
             <Label Content="Kwota za naprawę" Margin="15,0,20,0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2" Style="{StaticResource MainLabelStyle}"/>
-
-            <TextBox Margin="20,0,20,0" Grid.Row="1" Grid.Column="0" TextWrapping="NoWrap" Background="White" Padding="5"/>
-
+            <TextBox Margin="20,0,20,0" Grid.Row="1" Grid.Column="0" TextWrapping="NoWrap" Background="White" Padding="5" Text="{Binding Price}"/>
 
             <Button Content="Wybierz mechanika" Command="{Binding NavigateToMechanicSelector}" Width="220"  FontSize="20" Margin="20" Style="{StaticResource MainButtonStyle}"/>
-            <Button Content="Zapisz naprawę" Command="{Binding SaveRepair}" Width="220"  FontSize="20" Margin="20" Style="{StaticResource MainButtonStyle}"/>
-
+            <Button Content="Zapisz naprawę" Command="{Binding SaveRepairCommand}" Width="220"  FontSize="20" Margin="20" Style="{StaticResource MainButtonStyle}"/>
         </StackPanel>
     </Grid>
 </Page>

@@ -19,22 +19,39 @@ namespace MASFinal.Backend.Models
             set => _requiresHelmsmanLicense = value;
         }
 
+        private decimal _displacment;
+        public decimal Displacement
+        {
+            get => _displacment;
+            set => _displacment = value;
+        }
+
         public string Type
         {
             get => "Amphibian";
             set => throw new NotImplementedException();
         }
-
-        private decimal _displacment;
-
-        public Amphibian(string brand, string model, decimal dailyRentalPrice, int numberOfSeats, DateTime productionDate, int power, int mileage, DrivingLicencType category, int numberOfWheels, int rimSize) : base(brand, model, dailyRentalPrice, numberOfSeats, productionDate, power, mileage, category, numberOfWheels, rimSize)
+        public Amphibian(decimal maximumLaunchAngle,
+            DriveSystem driveSystem,
+            bool requiresHelmsmanLicense,
+            decimal displacement,
+            string brand,
+            string model,
+            decimal dailyRentalPrice,
+            int numberOfSeats,
+            DateTime productionDate,
+            int power,
+            int mileage,
+            DrivingLicencType category,
+            int numberOfWheels,
+            int rimSize) 
+            : base(brand, model, dailyRentalPrice, numberOfSeats, productionDate, power, mileage, category, numberOfWheels, rimSize)
         {
-        }
+            MaximumLaunchAngle = maximumLaunchAngle;
+            DriveSystem = driveSystem;
+            RequiresHelmsmanLicense = requiresHelmsmanLicense;
+            Displacement = displacement;
 
-        public decimal Displacement
-        {
-            get => _displacment;
-            set => _displacment = value;
         }
     }
 }

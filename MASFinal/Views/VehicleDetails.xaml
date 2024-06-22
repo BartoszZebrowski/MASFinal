@@ -7,36 +7,62 @@
       xmlns:my="clr-namespace:MASFinal.Views.Common"
       mc:Ignorable="d" 
       d:DesignHeight="375" d:DesignWidth="800"
+      Width="Auto"
+      Height="Auto"
+      MinWidth="800"
+      MinHeight="375"
       Title="VehicleDetails">
 
     <Page.Resources>
         <DataTemplate x:Key="BusTemplate">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Label Content="Marka:" Style="{StaticResource MainLabelStyle}"/>
-                <Label Content="{Binding GroundVehicle.Brand}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Label Content="Ładowność skrzyni" Style="{StaticResource MainLabelStyle}"/>
+                    <Label Content="{Binding Bus.TrunkCapacity}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Label Content="Typ nadwozia" Style="{StaticResource MainLabelStyle}"/>
+                    <Label Content="{Binding Bus.TypeOfBody}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+                </StackPanel>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="CamperTemplate">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Label Content="Wyposażenie:" Style="{StaticResource MainLabelStyle}"/>
-                <Label Content="{Binding Camper.Equipment}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
-                <Label Content="Czy ma generator:" Style="{StaticResource MainLabelStyle}"/>
-                <Label Content="{Binding Camper.HasGenerator}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Label Content="Wyposażenie:" Style="{StaticResource MainLabelStyle}"/>
+                    <Label Content="{Binding Camper.Equipment}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Label Content="Czy ma generator:" Style="{StaticResource MainLabelStyle}"/>
+                    <Label Content="{Binding Camper.HasGenerator}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+                </StackPanel>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="AmphibianTemplate">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Label Content="Marka:" Style="{StaticResource MainLabelStyle}"/>
-                <Label Content="{Binding GroundVehicle.Model}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Label Content="Typ wodnego napędu" Style="{StaticResource MainLabelStyle}"/>
+                    <Label Content="{Binding DriveSystem}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Label Content="Maksymalny kąt wodowania" Style="{StaticResource MainLabelStyle}"/>
+                    <Label Content="{Binding MaximumLaunchAngle}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+                </StackPanel>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="BoatTemplate">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Label Content="Marka:" Style="{StaticResource MainLabelStyle}"/>
-                <Label Content="{Binding Brand}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Label Content="Możliwość spania" Style="{StaticResource MainLabelStyle}"/>
+                    <Label Content="{Binding CanSleep}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Label Content="Posiada żagiel" Style="{StaticResource MainLabelStyle}"/>
+                    <Label Content="{Binding HasSail}" HorizontalContentAlignment="Left" FontWeight="Bold" Foreground="{StaticResource MainGreen}" Style="{StaticResource MainLabelStyle}" />
+                </StackPanel>
             </StackPanel>
         </DataTemplate>
 
@@ -54,9 +80,6 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-
-
-
 
         <StackPanel Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Center">
 
@@ -91,31 +114,36 @@
         <StackPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Vertical">
             <Label FontSize="25" Content="Naprawy" Style="{StaticResource MainLabelStyle}"/>
 
-            <ListView Height="230" Grid.Column="0" Name="userList" ItemsSource="{Binding Vehicles}" SelectionMode="Single" SelectedItem="{Binding SelectedVehicle}" BorderThickness="0">
+            <ListView Height="Auto" Grid.Column="0" Name="userList" ItemsSource="{Binding Repairs}" BorderThickness="0">
 
                 <ListView.Resources>
                     <Style TargetType="ListViewItem">
                         <Setter Property="Foreground" Value="White"/>
                         <Setter Property="Background" Value="Black"/>
                         <Setter Property="BorderThickness" Value="0"/>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#B010FF0B"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </Style.Triggers>
                     </Style>
                 </ListView.Resources>
-                
+
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Data rozpoczecia" Width="110" DisplayMemberBinding="{Binding Brand}"/>
-                        <GridViewColumn Header="Data zakończenia" Width="110" DisplayMemberBinding="{Binding Model}"/>
-                        <GridViewColumn Header="Koszt" Width="60" DisplayMemberBinding="{Binding DailyRentalPrice}"/>
-                        <GridViewColumn Header="Opis" Width="100" DisplayMemberBinding="{Binding DailyRentalPrice}"/>
+                        <GridViewColumn Header="Data rozpoczecia" Width="110" DisplayMemberBinding="{Binding StartDate}"/>
+                        <GridViewColumn Header="Data zakończenia" Width="110" DisplayMemberBinding="{Binding EndDate}"/>
+                        <GridViewColumn Header="Koszt" Width="60" DisplayMemberBinding="{Binding RepairCost}"/>
+                        <GridViewColumn Header="Czy za" Width="100" DisplayMemberBinding="{Binding Description}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
 
-        <Button VerticalAlignment="Bottom" Content="Dodaj naprawę" Command="{Binding NavigateToRepairDateSelector}" Width="250"  FontSize="20" Margin="20" Style="{StaticResource MainButtonStyle}"/>
-
+            <Button VerticalAlignment="Bottom" Content="Dodaj naprawę" Command="{Binding NavigateToRepairDateSelector}" Width="250"  FontSize="20" Margin="20" Style="{StaticResource MainButtonStyle}"/>
+            <Button VerticalAlignment="Bottom" Content="Wróć" Command="{Binding NavigateToBack}" Width="250"  FontSize="20" Margin="20" Style="{StaticResource MainButtonStyle}"/>
 
         </StackPanel>
-
-
     </Grid>
 </Page>

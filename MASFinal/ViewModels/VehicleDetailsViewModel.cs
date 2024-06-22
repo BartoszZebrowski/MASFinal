@@ -18,7 +18,13 @@ namespace MASFinal.ViewModels
             get => _groundVehicle;
             set => SetField(ref _groundVehicle, value);
         }
+
+        public List<Repair> Repairs => (Vehicle as GroundVehicle)?.Repairs;
+
         public ICommand NavigateToRepairDateSelector { get; set; }
+
+        public ICommand NavigateToBack { get; set; }
+
 
         public VehicleDetailsViewModel(IVehicle groundVehicle)
         {
@@ -27,6 +33,8 @@ namespace MASFinal.ViewModels
             NavigateToRepairDateSelector = new RelayCommand(
                 _ => MainWindowViewModel.GetInstance().ChangePage(new RepairDateSelector(Vehicle as GroundVehicle)),
                 _ => Vehicle.Type == "Bus" || Vehicle.Type == "Camper");
+
+            NavigateToBack = new RelayCommand(_ => MainWindowViewModel.GetInstance().ChangePage(new VehiclesList()));
 
             OnPropertyChanged(nameof(Vehicle));
         }

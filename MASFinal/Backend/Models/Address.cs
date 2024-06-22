@@ -22,5 +22,15 @@ namespace MASFinal.Backend.Models
         public string PostalCode { get; set; } = string.Empty;
         public string City { get; set; } = string.Empty;
         public string Country { get; set; } = string.Empty;
+
+        public Address(string street, int houseNumber, int? apartmentNumber, string postalCode, string city, string country)
+        {
+            Street = street;
+            HouseNumber = houseNumber;
+            ApartmentNumber = apartmentNumber;
+            PostalCode = postalCode;
+            City = city;
+            Country = country;
+        }
     }
 }

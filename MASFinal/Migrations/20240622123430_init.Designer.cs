@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MASFinal.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240620215341_change2")]
-    partial class change2
+    [Migration("20240622123430_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -179,7 +179,7 @@ namespace MASFinal.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("Client");
+                    b.ToTable("Clients");
                 });
 
             modelBuilder.Entity("MASFinal.Backend.Models.CombustionEngine", b =>

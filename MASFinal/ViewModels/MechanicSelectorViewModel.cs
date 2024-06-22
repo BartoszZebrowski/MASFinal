@@ -1,4 +1,5 @@
 ﻿using MASFinal.Backend.Models;
+using MASFinal.Backend.Services;
 using MASFinal.ViewModels.Common;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,13 @@ namespace MASFinal.ViewModels
 {
     public class MechanicSelectorViewModel : NotifyPropertyChanged
     {
-        public Mechanic SelectedMechanic { get; set; }
-        public List<Mechanic> Mechanics { get; set; }
+        private Mechanic _selectedMechanic;
+        public Mechanic SelectedMechanic 
+        { 
+            get => _selectedMechanic; 
+            set => SetField(ref _selectedMechanic, value); 
+        }
+        public List<Mechanic> Mechanics { get; set; } = new();
         public ICommand SelectMechanic { get; set; }
 
 
@@ -22,14 +28,17 @@ namespace MASFinal.ViewModels
         {
             _createRepairDetailsViewModel = createRepairDetailsViewModel;
 
-            SelectMechanic = new RelayCommand(_ => _createRepairDetailsViewModel.Mechanic = SelectedMechanic);
+            SelectMechanic = new RelayCommand(
+                _ => _createRepairDetailsViewModel.Mechanic = SelectedMechanic,
+                _ => SelectedMechanic is not null);
 
             GetMechanics();
         }
 
         private void GetMechanics()
         {
-            // pobieranie mechanikow
+            Mechanics = new PersonRepository().GetAllMechanics().ToList();
+            OnPropertyChanged();
         }
     }
 }

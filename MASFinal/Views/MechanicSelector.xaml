@@ -7,6 +7,10 @@
       mc:Ignorable="d" 
       d:DesignHeight="375" d:DesignWidth="800"
       Title="MechanicSelector"
+      Width="Auto"
+      Height="Auto"
+      MinWidth="800"
+      MinHeight="450"  
       Background="Black">
 
     <Window.Resources>
@@ -16,7 +20,7 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid>
+    <Grid MaxHeight="375" MaxWidth="800">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
@@ -43,9 +47,9 @@
         </StackPanel>
 
 
-        <Label Content="Ford Transit" Grid.Row="1" FontSize="30" VerticalAlignment="Center" Grid.ColumnSpan="3" Style="{StaticResource MainLabelStyle}"/>
+        <Label Content="{Binding GroundVehicle.FullName}" Grid.Row="1" FontSize="30" VerticalAlignment="Center" Grid.ColumnSpan="3" Style="{StaticResource MainLabelStyle}"/>
 
-        <ListView Grid.Column="0" Grid.Row="2" Name="userList" ItemsSource="{Binding Vehicles}" SelectionMode="Single" SelectedItem="{Binding SelectedVehicle}" BorderThickness="0">
+        <ListView Grid.Column="0" Grid.Row="2" Name="userList" ItemsSource="{Binding Mechanics}" SelectionMode="Single" SelectedItem="{Binding SelectedMechanic}" BorderThickness="0">
 
             <ListView.Resources>
                 <Style TargetType="ListViewItem">
@@ -53,16 +57,21 @@
                     <Setter Property="Background" Value="Black"/>
                     <Setter Property="BorderThickness" Value="0"/>
 
-
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#B010FF0B"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </ListView.Resources>
 
 
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Imie" Width="70" DisplayMemberBinding="{Binding Brand}"/>
-                    <GridViewColumn Header="Nazwisko" Width="100" DisplayMemberBinding="{Binding Model}"/>
-                    <GridViewColumn Header="Wynagrodzenie" Width="100" DisplayMemberBinding="{Binding DailyRentalPrice}"/>
+                    <GridViewColumn Header="Imie" Width="70" DisplayMemberBinding="{Binding FirstName}"/>
+                    <GridViewColumn Header="Nazwisko" Width="100" DisplayMemberBinding="{Binding LastName}"/>
+                    <GridViewColumn Header="Wynagrodzenie" Width="100" DisplayMemberBinding="{Binding GrossSalary}"/>
                 </GridView>
             </ListView.View>
         </ListView>

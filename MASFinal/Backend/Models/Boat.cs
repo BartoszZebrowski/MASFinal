@@ -71,7 +71,7 @@ namespace MASFinal.Backend.Models
             set { _drive = value; }
         }
 
-        private List<Rent> _rents;
+        private List<Rent> _rents = new ();
         public List<Rent> Rents
         {
             get { return _rents ??= new List<Rent>(); }
@@ -98,6 +98,31 @@ namespace MASFinal.Backend.Models
         { 
             get => "Boat";
             set => throw new NotImplementedException();
+        }
+
+        public Boat(
+            string brand,
+            string model,
+            decimal dailyRentalPrice,
+            int numberOfSeats,
+            DateTime productionDate,
+            int power,
+            bool requiresHelmsmanLicense,
+            decimal displacement,
+            bool hasSail,
+            bool canSleep)
+        {
+            Brand = brand;
+            Model = model;
+            DailyRentalPrice = dailyRentalPrice;
+            NumberOfSeats = numberOfSeats;
+            BuyDate = DateTime.Now;
+            ProductionDate = productionDate;
+            Power = power;
+            RequiresHelmsmanLicense = requiresHelmsmanLicense;
+            Displacement = displacement;
+            HasSail = hasSail;
+            CanSleep = canSleep;
         }
 
         public void SellVehicle(decimal price)

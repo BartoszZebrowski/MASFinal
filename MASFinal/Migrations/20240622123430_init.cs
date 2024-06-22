@@ -81,7 +81,7 @@ namespace MASFinal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Client",
+                name: "Clients",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -95,9 +95,9 @@ namespace MASFinal.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Client", x => x.Id);
+                    table.PrimaryKey("PK_Clients", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Client_Adress_AddressId",
+                        name: "FK_Clients_Adress_AddressId",
                         column: x => x.AddressId,
                         principalTable: "Adress",
                         principalColumn: "Id",
@@ -197,8 +197,8 @@ namespace MASFinal.Migrations
                     Category = table.Column<int>(type: "int", nullable: false),
                     NumberOfWheels = table.Column<int>(type: "int", nullable: false),
                     RimSize = table.Column<int>(type: "int", nullable: false),
-                    BusId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CamperId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BusId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CamperId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Discriminator = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
                     MaximumLaunchAngle = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     DriveSystem = table.Column<int>(type: "int", nullable: true),
@@ -248,9 +248,9 @@ namespace MASFinal.Migrations
                         principalTable: "Boats",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Rents_Client_ClientId",
+                        name: "FK_Rents_Clients_ClientId",
                         column: x => x.ClientId,
-                        principalTable: "Client",
+                        principalTable: "Clients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -294,8 +294,8 @@ namespace MASFinal.Migrations
                 column: "DriveId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Client_AddressId",
-                table: "Client",
+                name: "IX_Clients_AddressId",
+                table: "Clients",
                 column: "AddressId");
 
             migrationBuilder.CreateIndex(
@@ -316,13 +316,15 @@ namespace MASFinal.Migrations
                 name: "IX_GroundVehicles_BusId",
                 table: "GroundVehicles",
                 column: "BusId",
-                unique: true);
+                unique: true,
+                filter: "[BusId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GroundVehicles_CamperId",
                 table: "GroundVehicles",
                 column: "CamperId",
-                unique: true);
+                unique: true,
+                filter: "[CamperId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GroundVehicles_DriveId",
@@ -373,7 +375,7 @@ namespace MASFinal.Migrations
                 name: "Boats");
 
             migrationBuilder.DropTable(
-                name: "Client");
+                name: "Clients");
 
             migrationBuilder.DropTable(
                 name: "GroundVehicles");

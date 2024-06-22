@@ -37,7 +37,7 @@ namespace MASFinal.Backend.Models
 
         private Rent() { }  
 
-        public static Rent CreateRent(Client client, IVehicle vehicle, DateTime rentalDate, DateTime returnDate, decimal rentalAmount)
+        public static Rent CreateRent(Client client, IVehicle vehicle, DateTime dateFrom, DateTime dateTo)
         {
             if (client is null)
                 throw new ArgumentNullException("Client can't be null!");
@@ -45,7 +45,9 @@ namespace MASFinal.Backend.Models
             if (vehicle is null)
                 throw new ArgumentNullException("Client can't be null!");
 
-            var rent = new Rent(rentalDate, returnDate, rentalAmount, client, vehicle);
+            var rentAmount = vehicle.DailyRentalPrice * (dateTo - dateFrom).Days;
+
+            var rent = new Rent(dateFrom, dateTo, rentAmount, client, vehicle);
 
             client.AddRent(rent);
             vehicle.AddRent(rent);

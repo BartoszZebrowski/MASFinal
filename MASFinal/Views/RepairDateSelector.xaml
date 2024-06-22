@@ -8,6 +8,8 @@
       d:DesignHeight="375" d:DesignWidth="800"
       Width="Auto"
       Height="Auto"
+      MinWidth="800"
+      MinHeight="375"
       Title="RepairDateSelector">
 
     <Grid>
@@ -24,20 +26,19 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <Label Content="Ford Transit" Grid.Row="0" FontSize="30" VerticalAlignment="Center" Grid.ColumnSpan="3" Style="{StaticResource MainLabelStyle}"/>
+        <Label Content="{Binding GroundVehicle.FullName}" Grid.Row="0" FontSize="30" VerticalAlignment="Center" Grid.ColumnSpan="3" Style="{StaticResource MainLabelStyle}"/>
 
 
-        <StackPanel Grid.Row="1" Grid.Column="0">
+        <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Top">
             <Label Content="Od" FontSize="25" Style="{StaticResource MainLabelStyle}"/>
             <DatePicker SelectedDate="{Binding DateFrom}" />
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
             <Button Content="Wybierz date" Command="{Binding NavigateToCreateRepairDetails}" Width="220"  FontSize="20" Margin="20" Style="{StaticResource MainButtonStyle}"/>
-            
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="2">
+        <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Top">
             <Label Content="Do" FontSize="25" Style="{StaticResource MainLabelStyle}"/>
             <DatePicker  SelectedDate="{Binding DateTo}" />
         </StackPanel>

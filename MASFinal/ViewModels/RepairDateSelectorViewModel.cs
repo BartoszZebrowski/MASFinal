@@ -1,4 +1,5 @@
 ﻿using MASFinal.Backend.Models;
+using MASFinal.Backend.Services;
 using MASFinal.ViewModels.Common;
 using MASFinal.Views;
 using System;
@@ -16,7 +17,7 @@ namespace MASFinal.ViewModels
 
         public ICommand NavigateToCreateRepairDetails { get; set; }
 
-        private bool _isRented;
+        private bool _isRented = true;
         public bool IsRented
         {
             get => _isRented;
@@ -41,18 +42,20 @@ namespace MASFinal.ViewModels
         {
             GroundVehicle = groundVehicle;
 
-
             NavigateToCreateRepairDetails = new RelayCommand(
                 _ => SelectDateRepair(),
-                _ => DateFrom != null && DateTo != null);
+                _ => !IsRented && DateFrom != null && DateTo != null);
+
+            PropertyChanged += OnPropertyChanged;
+        }
+
+        private void OnPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            IsRented = GroundVehicle.Rents.Any(rent => rent.RentalDate <= DateFrom && rent.ReturnDate >= DateTo);
         }
 
         private void SelectDateRepair()
         {
-            // sprawdzic czy jest wporzyczony
-
-            IsRented = false;
-
             MainWindowViewModel.GetInstance().ChangePage(new CreateRepairDetails(GroundVehicle, (DateTime)DateFrom, (DateTime)DateTo));
         }
     }
