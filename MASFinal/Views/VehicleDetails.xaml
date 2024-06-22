@@ -136,7 +136,7 @@
                         <GridViewColumn Header="Data rozpoczecia" Width="110" DisplayMemberBinding="{Binding StartDate}"/>
                         <GridViewColumn Header="Data zakończenia" Width="110" DisplayMemberBinding="{Binding EndDate}"/>
                         <GridViewColumn Header="Koszt" Width="60" DisplayMemberBinding="{Binding RepairCost}"/>
-                        <GridViewColumn Header="Czy za" Width="100" DisplayMemberBinding="{Binding Description}"/>
+                        <GridViewColumn Header="Opis" Width="100" DisplayMemberBinding="{Binding Description}"/>
                     </GridView>
                 </ListView.View>
             </ListView>

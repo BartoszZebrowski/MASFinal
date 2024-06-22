@@ -43,7 +43,7 @@
                         <GridViewColumn Header="Marka" Width="70" DisplayMemberBinding="{Binding Brand}"/>
                         <GridViewColumn Header="Model" Width="100" DisplayMemberBinding="{Binding Model}"/>
                         <GridViewColumn Header="Koszt za dzień" Width="100" DisplayMemberBinding="{Binding DailyRentalPrice}"/>
-                        <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding Type}"/>
+                        <GridViewColumn Header="Typ" Width="100" DisplayMemberBinding="{Binding Type}"/>
 
                     </GridView>
                 </ListView.View>

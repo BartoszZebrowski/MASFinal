@@ -1,10 +1,12 @@
-﻿using MASFinal.Backend.Generic;
+﻿using MASFinal.Backend.Fake;
+using MASFinal.Backend.Generic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MASFinal.Backend.Models
 {
@@ -57,7 +59,9 @@ namespace MASFinal.Backend.Models
 
         public void SendRemind()
         {
-            //integration with sms/email send service
+            var remindText = $"Cześć! Niedługo zbliża sie termin zwrócenia pojazdu {Vehicle.Brand} {Vehicle.Model}. Nie zapomnij zwrócić go do {ReturnDate.ToString()}. Szerokiej drogi!";
+
+            new FakeSendService().SendRemind(remindText);
         }
     }
 }

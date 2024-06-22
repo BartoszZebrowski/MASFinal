@@ -190,15 +190,6 @@ namespace MASFinal.Backend.Models
             RimSize = rimSize;
         }
 
-        public void ScrapVehicle(decimal price)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SellVehicle(decimal price)
-        {
-            throw new NotImplementedException();
-        }
         public void SetBus(Bus bus)
         {
             if(Bus is not null)
@@ -239,6 +230,22 @@ namespace MASFinal.Backend.Models
                 throw new Exception("This Reapir is set to other groudnVehicle");
 
             Repairs.Add(repair);
+        }
+
+        public static Dictionary<int, int> GenerateRaportAboutTires()
+        {
+            var noubersOfTiresBySize = new Dictionary<int, int>();
+
+
+            var vehicles = new VehicleRepository().GetAllVehicles();
+
+            foreach (var vehicle in vehicles)
+            {
+                if (vehicle is GroundVehicle groundVehicle) 
+                    noubersOfTiresBySize[groundVehicle.RimSize] += groundVehicle.NumberOfWheels; 
+            }
+
+            return noubersOfTiresBySize;
         }
     }
 }

@@ -2,6 +2,7 @@
 using MASFinal.Backend.Services;
 using MASFinal.ViewModels.Common;
 using MASFinal.Views;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,8 @@ namespace MASFinal.ViewModels
                 _ => new MechanicSelectorWindow(this).ShowDialog());
 
             SaveRepairCommand = new RelayCommand(
-                _ => SaveRepair());
+                _ => SaveRepair(),
+                _ => !Descritpion.IsNullOrEmpty() && Price != 0);
 
         }
 

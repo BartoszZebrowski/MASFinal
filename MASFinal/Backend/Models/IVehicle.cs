@@ -22,8 +22,15 @@ namespace MASFinal.Backend.Models
         public List<Rent> Rents { get; set; }
         public string Type { get; set; }
 
-        public void SellVehicle(decimal price);
-        public void ScrapVehicle(decimal price);
+        public void ScrapVehicle()
+        {
+            new VehicleRepository().DeleteVehicle(this);
+        }
+
+        public void SellVehicle(decimal price)
+        {
+            new VehicleRepository().DeleteVehicle(this);
+        }
         public void AddRent(Rent rent) => Rents.Add(rent);
         public void SetDriveType(DriveType drive)
         {
